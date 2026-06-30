@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Zone 01 — Profil</title>
+    <link rel="stylesheet" href="css/profile.css"/>
+</head>
+<body>
+
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-logo">
+                <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+                    <polygon points="16,2 28,9 28,23 16,30 4,23 4,9"
+                             fill="none" stroke="#0068c9" stroke-width="1.5"/>
+                    <polygon points="16,7 24,11.5 24,20.5 16,25 8,20.5 8,11.5"
+                             fill="#0068c9" opacity="0.15"/>
+                    <text x="16" y="21" text-anchor="middle"
+                          fill="#0068c9" font-size="11"
+                          font-family="Courier New" font-weight="bold">01</text>
+                </svg>
+                <span class="header-title">Zone 01 <span class="header-sub">Normandie</span></span>
+            </div>
+            <button class="btn-logout" id="logoutBtn">Déconnexion</button>
+        </div>
+    </header>
+
+    <!-- ── Main ───────────────────────────────────────────────── -->
+    <main class="main">
+
+        <!-- Identification -->
+        <section class="card identity-card">
+            <div class="avatar" id="avatar">--</div>
+            <div class="identity-info">
+                <h1 class="identity-login" id="userLogin">Chargement...</h1>
+                <p class="identity-email" id="userEmail">—</p>
+            </div>
+        </section>
+
+        <!-- Stats rapides -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">XP Total</span>
+                <span class="stat-value" id="xpTotal">—</span>
+                <span class="stat-unit">kB</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Niveau</span>
+                <span class="stat-value" id="userLevel">—</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Audits reçus</span>
+                <span class="stat-value" id="auditsDown">—</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Audits donnés</span>
+                <span class="stat-value" id="auditsUp">—</span>
+            </div>
+        </section>
+
+        <!-- Grades / Skills -->
+        <section class="card">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-list" id="skillsList">
+                <!-- Injecté par profile.js -->
+                <p class="placeholder">Chargement des compétences...</p>
+            </div>
+        </section>
+
+        <!-- Graphique 1 : XP dans le temps -->
+        <section class="card">
+            <h2 class="section-title">XP cumulé dans le temps</h2>
+            <div class="graph-wrap">
+                <svg id="graphXP" viewBox="0 0 700 280" preserveAspectRatio="xMidYMid meet">
+                    <text x="350" y="140" text-anchor="middle"
+                          fill="#4a7a60" font-size="13" font-family="Courier New">
+                        Chargement...
+                    </text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Graphique 2 : Ratio audits -->
+        <section class="card">
+            <h2 class="section-title">Ratio audits</h2>
+            <div class="graph-wrap graph-wrap--center">
+                <svg id="graphAudits" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet">
+                    <text x="200" y="130" text-anchor="middle"
+                          fill="#4a7a60" font-size="13" font-family="Courier New">
+                        Chargement...
+                    </text>
+                </svg>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/graphql.js"></script>
+    <script src="js/queries.js"></script>
+    <script src="js/graphs.js"></script>
+    <script src="js/profile.js"></script>
+
+</body>
+</html>

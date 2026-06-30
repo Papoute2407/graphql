@@ -1,0 +1,300 @@
+/* profile.css */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:        #212222;
+    --bg-card:   #0d1117;
+    --bg-stat:   #0f1a14;
+    --border:    #0068c9;
+    --blue:      #0068c9;
+    --text:      #e0ffe8;
+    --text-muted:#0068c9;
+    --font-mono: 'Courier New', monospace;
+    --font-sans: 'Segoe UI', system-ui, sans-serif;
+    --radius:    6px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ── Grid background ────────────────────────────────────────── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,104,201,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,104,201,0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #212222ee;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-title {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--blue);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.header-sub {
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    margin-left: 4px;
+}
+
+.btn-logout {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-logout:hover {
+    border-color: #e24b4a;
+    color: #f09595;
+}
+
+/* ── Main layout ─────────────────────────────────────────────── */
+.main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--blue);
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.section-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ── Identity card ───────────────────────────────────────────── */
+.identity-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #0d1117;
+    border: 2px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--blue);
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+.identity-login {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.identity-email {
+    font-size: 13px;
+    color: var(--blue);
+    font-family: var(--font-mono);
+}
+
+/* ── Stats grid ──────────────────────────────────────────────── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--blue);
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font-mono);
+    line-height: 1.1;
+}
+
+.stat-unit {
+    font-size: 12px;
+    color: var(--blue);
+    font-family: var(--font-mono);
+}
+
+/* ── Skills list ─────────────────────────────────────────────── */
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skill-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.skill-name {
+    font-size: 12px;
+    color: var(--blue);
+    font-family: var(--font-mono);
+    min-width: 140px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.skill-bar-bg {
+    flex: 1;
+    height: 5px;
+    background: #1a2a3a;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.skill-pct {
+    font-size: 12px;
+    color: var(--blue);
+    font-family: var(--font-mono);
+    min-width: 36px;
+    text-align: right;
+}
+
+/* ── Graph ───────────────────────────────────────────────────── */
+.graph-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.graph-wrap--center {
+    display: flex;
+    justify-content: center;
+}
+
+.graph-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ── Placeholder ─────────────────────────────────────────────── */
+.placeholder {
+    font-size: 13px;
+    color: var(--blue);
+    font-family: var(--font-mono);
+    text-align: center;
+    padding: 1rem 0;
+    opacity: 0.5;
+}
