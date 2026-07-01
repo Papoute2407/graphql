@@ -45,18 +45,27 @@ async function loadXP() {
     const data = await fetchGraphQL(GET_XP);
     const transactions = data.transaction;
 
-    // Calcul XP total
-    const total = transactions.reduce((sum, t) => sum + t.amount, 0);
+    // Keep only transactions where path has max 3 segments (/campus/cursus/project)
+    // or is a direct checkpoint (/campus/cursus/checkpoint/exercise)
+    const filtered = transactions.filter(t => {
+        const parts = t.path.split('/').filter(Boolean); // remove empty strings
+        if (parts.length === 3 && parts[1].startsWith('div-')) return true;  // /rouen/div-01/project ✅
+        if (parts.length === 4  && parts[1].startsWith('div-') && parts[2].startsWith('checkpoint')) return true; // /rouen/div-01/checkpoint/x ✅
+        return false;
+    });
+
+    // 🔍 DEBUG
+    console.log('Total transactions:', transactions.length);
+    console.log('After filter:', filtered.length);
+    console.log('Total XP:', filtered.reduce((s, t) => s + t.amount, 0));
+    console.log('Kept paths:', filtered.map(t => t.path));
+    ///
+
+    const total = filtered.reduce((sum, t) => sum + t.amount, 0);
     document.getElementById('xpTotal').textContent = Math.round(total / 1000);
 
-    // Tri par date pour le graphique
-    const sorted = [...transactions].sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-    );
-
-    // Calcul XP cumulé
     let cumul = 0;
-    const points = sorted.map(t => {
+    const points = filtered.map(t => {
         cumul += t.amount;
         return { date: new Date(t.createdAt), xp: cumul };
     });

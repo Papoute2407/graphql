@@ -6,44 +6,22 @@ const GET_USER = `{
         id
         login
         email
+        campus
     }
 }`;
 
 // ── 2. Requête avec argument ──────────────────────────────────
 // XP hors piscine uniquement
 const GET_XP = `{
-    transaction(
-        where: {
-            type: { _eq: "xp" },
-            _and: [
-                { path: { _like: "/rouen/div-01/%" } },
-                {
-                    _or: [
-                        { path: { _nlike: "/rouen/div-01/%/%" } },
-                        { path: { _like: "/rouen/div-01/checkpoint%" } }
-                    ]
-                }
-            ]
-        },
-    ) {
+    transaction(where: {
+        type: { _eq: "xp" }
+    }, order_by: { createdAt: asc }) {
         amount
         createdAt
         path
     }
 }`;
 
-// ── 3. Requête imbriquée (nested) ─────────────────────────────
-const GET_RESULTS = `{
-    result {
-        grade
-        createdAt
-        path
-        object {
-            name
-            type
-        }
-    }
-}`;
 
 // ── 4. Requête avec variable dynamique ────────────────────────
 const GET_OBJECT = `
@@ -81,11 +59,8 @@ const GET_SKILLS = `{
 const GET_LEVEL = `{
     transaction(where: {
         type: { _eq: "level" },
-        _and: [
-            { path: { _like: "/rouen/%" } },
-            { path: { _nlike: "%piscine%" } }
-        ]
-    }, order_by: { amount: desc }, limit: 1) {
+        path: { _like: "/rouen/div-01%" },
+    }, order_by: { createdAt: desc }, limit: 1) {
         amount
     }
 }`;
