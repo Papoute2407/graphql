@@ -49,6 +49,7 @@ async function loadXP() {
     // or is a direct checkpoint (/campus/cursus/checkpoint/exercise)
     const filtered = transactions.filter(t => {
         const parts = t.path.split('/').filter(Boolean); // remove empty strings
+        if (parts.length === 2 && parts[1].startsWith('div-')) return true; // /rouen/div-01 ✅
         if (parts.length === 3 && parts[1].startsWith('div-')) return true;  // /rouen/div-01/project ✅
         if (parts.length === 4  && parts[1].startsWith('div-') && parts[2].startsWith('checkpoint')) return true; // /rouen/div-01/checkpoint/x ✅
         return false;
@@ -105,10 +106,9 @@ async function loadSkills() {
 
     // Trier par valeur décroissante, garder les 8 premiers
     const sorted = Object.entries(skillMap)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 8);
+        .sort((a, b) => b[1] - a[1]);
 
-    const max = sorted[0]?.[1] || 100;
+    const max = 100;
     const container = document.getElementById('skillsList');
     container.innerHTML = '';
 
